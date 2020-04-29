@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-"""
+'''
 Define Place routes.
-"""
+'''
 
 from api.v1.views import app_views
 from flask import abort, jsonify, request
