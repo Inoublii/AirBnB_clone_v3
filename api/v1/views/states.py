@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-'''
+"""
 Define state routes.
-'''
+"""
 
 
 from flask import request, abort, jsonify
@@ -12,7 +12,7 @@ from api.v1.views import app_views
 
 @app_views.route("/states", methods=["GET", "POST"])
 def states():
-    """Define /satets
+    """Define /satets route with GET and POST methods
     """
     if request.method == "GET":
         return jsonify([state.to_dict()
@@ -29,7 +29,7 @@ def states():
 
 @app_views.route("/states/<state_id>", methods=["GET", "DELETE", "PUT"])
 def state(state_id):
-    """Define /state/<state_id>
+    """Define /state/<state_id> with GET, PUT and DELETE  methodes
     """
     state = storage.get('State', state_id)
     if state is None:

@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""Define city routes."""
+
 
 from flask import request, abort, jsonify
 from models import storage
@@ -9,15 +11,17 @@ from api.v1.views import app_views
 
 @app_views.route("/states/<state_id>/cities", methods=["GET", "POST"])
 def cities(state_id):
-    '''Define /cities route
-    '''
+    """Define /cities route with GET and POST methods
+    """
     state = storage.get('State', state_id)
     if state is None:
         return abort(404)
 
+    # GET
     if request.method == "GET":
         return jsonify([city.to_dict() for city in state.cities])
 
+    # POST
     doc = request.get_json(silent=True)
     if doc is None:
         return "Not a JSON", 400
@@ -31,15 +35,17 @@ def cities(state_id):
 
 @app_views.route("/cities/<city_id>", methods=["GET", "DELETE", "PUT"])
 def city(city_id):
-    """Define /cities/<city_id>
+    """Define /cities/<city_id> with GET, PUT and DELETE  methodes
     """
     city = storage.get('City', city_id)
     if city is None:
         abort(404)
 
+    # GET
     if request.method == "GET":
         return jsonify(city.to_dict())
 
+    # PUT
     elif request.method == "PUT":
         doc = request.get_json(silent=True)
         if doc is None:
@@ -51,6 +57,7 @@ def city(city_id):
         city.save()
         return jsonify(city.to_dict())
 
+    # DELETE
     city.delete()
     city.save()
     return jsonify({})
