@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-"""
+'''
 Define User routes.
-"""
+'''
 
 
 from flask import request, abort, jsonify
