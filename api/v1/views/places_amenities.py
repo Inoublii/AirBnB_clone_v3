@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Define Place Amenities"""
+'''Define Place Amenities'''
 from os import getenv
 from api.v1.views import app_views
 from flask import abort, jsonify, request
