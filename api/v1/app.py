@@ -20,9 +20,9 @@ app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 
 @app.teardown_appcontext
 def close(exc):
-    """
-    Terminate session.
-    """
+    '''
+    close session.
+    '''
     storage.close()
 
 
