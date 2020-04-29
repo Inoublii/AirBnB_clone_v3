@@ -12,17 +12,13 @@ from api.v1.views import app_views
 
 @app_views.route("/users", methods=["GET", "POST"])
 def users():
-    """Define /users route with GET and POST methods
-    POST - Create a new user
-    GET - Get a list of all users
+    """Define /users route
     """
-    # GET
     if request.method == "GET":
         return jsonify(
             [user.to_dict() for user in storage.all('User').values()]
         )
 
-    # POST
     doc = request.get_json(silent=True)
     if doc is None:
         return "Not a JSON", 400
@@ -37,20 +33,15 @@ def users():
 
 @app_views.route("/users/<user_id>", methods=["GET", "DELETE", "PUT"])
 def user(user_id):
-    """Define /users/<user_id> with GET, PUT and DELETE  methods
-    GET - get a user with the given id
-    PUT - Update the user with the given id
-    DELETE - Delete the user with the given id
+    """Define /users
     """
     user = storage.get('User', user_id)
     if user is None:
         abort(404)
 
-    # GET
     if request.method == "GET":
         return jsonify(user.to_dict())
 
-    # PUT
     elif request.method == 'PUT':
         doc = request.get_json(silent=True)
         if doc is None:
@@ -65,7 +56,6 @@ def user(user_id):
         user.save()
         return jsonify(user.to_dict()), 200
 
-    # DELETE
     user.delete()
     storage.save()
     return jsonify({}), 200

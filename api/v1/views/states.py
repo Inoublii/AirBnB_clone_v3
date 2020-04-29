@@ -12,10 +12,7 @@ from api.v1.views import app_views
 
 @app_views.route("/states", methods=["GET", "POST"])
 def states():
-    """Define /satets route with GET and POST methods
-
-    POST - Create a new state
-    GET - Get a list of all states
+    """Define /satets
     """
     if request.method == "GET":
         return jsonify([state.to_dict()
@@ -32,11 +29,7 @@ def states():
 
 @app_views.route("/states/<state_id>", methods=["GET", "DELETE", "PUT"])
 def state(state_id):
-    """Define /state/<state_id> with GET, PUT and DELETE  methodes
-
-    GET - get a state with the given id
-    PUT - Update the state with the given id
-    DELETE - Deletes the state with the givem id
+    """Define /state/<state_id>
     """
     state = storage.get('State', state_id)
     if state is None:

@@ -1,8 +1,4 @@
 #!/usr/bin/python3
-"""
-File index.py
-"""
-
 
 from api.v1.views import app_views
 from flask import jsonify
@@ -17,7 +13,7 @@ def status():
 
 @app_views.route("/stats")
 def stats():
-    """Get the count of all instances by type
+    """
     """
     return jsonify({
         "amenities": storage.count('Amenity'),

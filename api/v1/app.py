@@ -1,14 +1,10 @@
 #!/usr/bin/python3
-"""
-Create API.
-"""
 
-
-from flask import Flask, jsonify
-from models import storage
 from flask_cors import CORS
 from api.v1.views import app_views
 from os import getenv
+from flask import Flask, jsonify
+from models import storage
 
 
 app = Flask(__name__)
@@ -21,14 +17,14 @@ app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 @app.teardown_appcontext
 def close(exc):
     """
-    Terminate session.
+    close session.
     """
     storage.close()
 
 
 @app.errorhandler(404)
 def not_found(error):
-    """Return not found modified JSON."""
+    """Return not found"""
     return jsonify({'error': 'Not found'}), 404
 
 

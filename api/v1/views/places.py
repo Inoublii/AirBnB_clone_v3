@@ -11,18 +11,14 @@ from models.place import Place
 
 @app_views.route("/cities/<city_id>/places", methods=["GET", "POST"])
 def places(city_id):
-    """Define GET /cities/<city_id>/places routes with GET and POST methodes.
-    GET - Get a list of all Amenity
-    POST - Creates a new Amenity
+    """Define GET /cities/
     """
-    # GET
     city = storage.get('City', city_id)
     if city is None:
         abort(404)
     if request.method == 'GET':
         return jsonify([place.to_dict() for place in city.places])
 
-    # POST
     doc = request.get_json(silent=True)
     if doc is None:
         return "Not a JSON", 400
@@ -42,26 +38,20 @@ def places(city_id):
 
 @app_views.route("/places/<place_id>", methods=["GET", "DELETE", "PUT"])
 def place_id(place_id):
-    """Defines /places/<place_id> with GET, DELETEa and PUT methods
-    GET - Get a Place object with the given id.
-    PUT - Updates a Place with the given id
-    DELETE - Deletes a Place with the given id
+    """Defines /places
     """
     place = storage.get("Place", place_id)
     if place is None:
         abort(404)
 
-    # GET
     if request.method == "GET":
         return jsonify(place.to_dict())
 
-    # DELETE
     elif request.method == "DELETE":
         storage.delete(place)
         storage.save()
         return jsonify({})
 
-    # PUT
     doc = request.get_json(silent=True)
     if doc is None:
         return "Not a JSON", 400
