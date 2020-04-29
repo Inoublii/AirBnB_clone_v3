@@ -3,7 +3,9 @@ from flask import Flask, jsonify
 from models import storage
 from api.v1.views import app_views
 from os import getenv
-"""API"""
+"""
+API
+"""
 
 
 app = Flask(__name__)
@@ -14,7 +16,7 @@ app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 @app.teardown_appcontext
 def teardown_storage(exception):
     """
-	"""
+    """
     storage.close()
 
 

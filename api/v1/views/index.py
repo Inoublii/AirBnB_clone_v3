@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 from api.v1.views import app_views
-rom flask import jsonify
+from flask import jsonify
 
 """
 create a route
