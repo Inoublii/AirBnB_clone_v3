@@ -18,15 +18,16 @@ app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 
 
 @app.teardown_appcontext
-def teardown_storage(exception):
+def close(exc):
     """
+    close session
     """
     storage.close()
 
 
 @app.errorhandler(404)
 def not_found(error):
-    """Return not found modified JSON."""
+    """Return not found """
     return jsonify({'error': 'Not found'}), 404
 
 
