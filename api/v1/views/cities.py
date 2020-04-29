@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""Define city routes."""
+"""
+Define city routes.
+"""
 
 
 from flask import request, abort, jsonify
@@ -12,6 +14,8 @@ from api.v1.views import app_views
 @app_views.route("/states/<state_id>/cities", methods=["GET", "POST"])
 def cities(state_id):
     """Define /cities route with GET and POST methods
+    POST - Create a new city
+    GET - Get a list of all cities
     """
     state = storage.get('State', state_id)
     if state is None:
@@ -36,6 +40,9 @@ def cities(state_id):
 @app_views.route("/cities/<city_id>", methods=["GET", "DELETE", "PUT"])
 def city(city_id):
     """Define /cities/<city_id> with GET, PUT and DELETE  methodes
+    GET - get a city with the given id
+    PUT - Update the city with the given id
+    DELETE - Deletes the cityy with the givem id
     """
     city = storage.get('City', city_id)
     if city is None:
